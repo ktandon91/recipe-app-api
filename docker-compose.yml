@@ -16,4 +16,4 @@ services:
 
 
 #docker-compose build , will build Dockerfile using this configuration
-#docker-compose run app sh -c " " to run command inside image
+#docker-compose run app sh -c "django-admin.py startproject app ." to run command inside image
