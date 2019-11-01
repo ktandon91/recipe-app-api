@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000" #first port is of host, second is of image
+    volumes:
+      - ./app:/app #maps local app directory to docker image
+    command: >
+      sh -C "python manage.py runserver 0.0.0.0:8000"
+
+
+
+
+
+#docker-compose build , will build Dockerfile using this configuration
+#docker-compose run app sh -c " " to run command inside image
