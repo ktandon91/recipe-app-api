@@ -7,12 +7,19 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
         "creates and saves a new user"
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
+    def create_superuser(self, email, password):
+        """creates and saves a new superuser"""
+        user = self.create_user(email=email, password=password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Custome user model supports email instead of username"""
